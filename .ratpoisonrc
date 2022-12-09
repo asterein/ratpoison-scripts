@@ -1,0 +1,187 @@
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# ║ Initial exec                                                               ║
+# ╚════════════════════════════════════════════════════════════════════════════╝
+exec /usr/bin/rpws init 9 -k
+exec redshift -x && redshift -O 3000
+#exec feh --bg-fill ~/Downloads/952227.jpg
+exec conky -d --config ~/.conkyrc
+exec xcompmgr -c -C -t-0 -l-0 -r0 -o0
+
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# ║ Settings                                                                   ║
+# ╚════════════════════════════════════════════════════════════════════════════╝
+
+set infofmt %n: %t
+set winfmt %n: %t
+
+rudeness 13
+warp on
+set startupmessage 0
+set winliststyle column
+
+set winname title
+set wingravity center
+set transgravity center
+set bargravity center
+
+set border 15
+set barborder 1
+
+# padding outside frames (not between frames)
+# <left> <top> <right> <bottom>
+set padding 15 45 15 15
+
+set barpadding 9 9
+
+set inputwidth 275
+set font "Monospace:size=13"
+
+set bgcolor #000000
+set fgcolor #ffffff
+# active frame
+set fwcolor #000000
+# inactive frame
+set bwcolor #000000
+
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# ║ Aliases                                                                    ║
+# ╚════════════════════════════════════════════════════════════════════════════╝
+
+alias batteryScript exec ratpoison -c "echo $(bash ~/scripts/bat)" &
+alias calendar exec ratpoison -c "echo $(lua ~/scripts/lunaco.lua --no-format)" &
+
+# Close the containing window and delete the frame
+alias closeFrame exec ratpoison -c delete -c remove &
+
+# Volume Controls
+alias vol exec ratpoison -c "echo $(bash ~/scripts/volume)" &
+alias volumeUp exec pactl set-sink-volume @DEFAULT_SINK@ +5% && ratpoison -c vol
+alias volumeDown exec pactl set-sink-volume @DEFAULT_SINK@ -5% && ratpoison -c vol
+alias volumeMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && ratpoison -c vol
+
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# ║ Binds                                                                      ║
+# ╚════════════════════════════════════════════════════════════════════════════╝
+#
+#   S -> shift modifier       M -> meta (hold alt) modifier
+#   C -> ctrl modifier        H -> hyper modifier (???)
+#   A -> alt modifer          s -> super modifier
+#
+
+escape Super_L
+bind Escape abort
+
+#bind M-B exec ratpoison -c batteryScript
+
+bind XF86AudioRaiseVolume exec ratpoison -c volumeUp
+bind XF86AudioLowerVolume exec ratpoison -c volumeDown
+bind XF86AudioMute exec ratpoison -c volumeMute
+
+bind slash exec
+bind Return exec alacritty
+bind C-Delete exec i3lock -c 000000 &
+bind apostrophe select
+
+bind M-E exec shutdown now
+
+bind a title
+bind b exec firefox
+bind c exec ratpoison -c calendar
+bind d exec rofi -show run
+bind f fselect
+bind i info
+bind C-K kill
+bind m lastmsg
+
+bind s-q exec ratpoison -c closeFrame
+bind C-s-q quit
+
+bind C-r resize
+bind C-R restart
+
+# block::s
+bind s hsplit
+bind C-s hsplit
+bind S split
+bind C-S split
+
+bind v version
+bind V license
+
+# block::w
+bind w windows
+bind C-w windows
+bind W windows
+bind C-W windows
+
+bind A-w windows
+bind M-w windows
+
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# ║ Core Binds                                                                 ║
+# ╚════════════════════════════════════════════════════════════════════════════╝
+bind Up focusup
+bind Down focusdown
+bind Left focusleft
+bind Right focusright
+
+bind S-Up exchangeup
+bind S-Down exchangedown
+bind S-Left exchangeleft
+bind S-Right exchangeright
+
+bind 1 exec rpws 1
+bind 2 exec rpws 2
+bind 3 exec rpws 3
+bind 4 exec rpws 4
+bind 5 exec rpws 5
+bind 6 exec rpws 6
+bind 7 exec rpws 7
+bind 8 exec rpws 8
+bind 9 exec rpws 9
+
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# ║ Unbinds                                                                    ║
+# ╚════════════════════════════════════════════════════════════════════════════╝
+unbind C-a
+unbind A
+unbind C-A
+unbind C-b
+unbind C-c
+unbind C-f
+unbind C-g
+unbind k
+unbind C-k
+unbind K
+unbind l
+unbind C-l
+unbind C-m
+unbind n
+unbind C-n
+unbind N
+unbind p
+unbind C-p
+unbind P
+unbind Q
+unbind r
+unbind R
+unbind C-u
+unbind C-v
+unbind C-V
+unbind x
+unbind C-x
+
+unbind Super_L
+unbind C-Super_L
+unbind C-Return
+unbind minus
+unbind C-exclam
+unbind M-Tab
+unbind C-underscore
+unbind C-space
+unbind C-apostrophe
+
+unbind C-Up
+unbind C-Down
+unbind C-Left
+unbind C-Right

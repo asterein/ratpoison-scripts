@@ -1,0 +1,41 @@
+#! /bin/bash
+
+message=""
+
+mute=$(eval pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
+volume=$(eval pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')
+
+v_num=${volume::-1}
+
+if [ $v_num == 0 ]; then
+	message="----------"
+elif [ $v_num -lt 10 ]; then
+	message="+---------"
+elif [ $v_num -lt 20 ]; then
+	message="++--------"
+elif [ $v_num -lt 30 ]; then
+	message="+++-------"
+elif [ $v_num -lt 40 ]; then
+	message="++++------"
+elif [ $v_num -lt 50 ]; then
+	message="+++++-----"
+elif [ $v_num -lt 60 ]; then
+	message="++++++----"
+elif [ $v_num -lt 70 ]; then
+	message="+++++++---"
+elif [ $v_num -lt 80 ]; then
+	message="++++++++--"
+elif [ $v_num -lt 90 ]; then
+	message="+++++++++-"
+elif [ $v_num == 100 ]; then
+	message="++++++++++"
+else
+	message="error: $v_num"
+fi
+
+if [ "$mute" = "yes" ]; then
+	echo "(muted)"
+else
+	echo "$message $volume"
+fi
+

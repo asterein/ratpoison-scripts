@@ -1,0 +1,9 @@
+#! /bin/bash
+
+bat_folder='/sys/class/power_supply/BAT0/'
+bat_lvl_file='capacity'
+bat_status_file='status'
+
+printf "$(cat $bat_folder$bat_status_file) @ "
+printf "$(cat $bat_folder$bat_lvl_file) percent"
+

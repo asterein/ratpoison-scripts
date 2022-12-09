@@ -1,0 +1,12 @@
+#! /bin/bash
+
+file=$(eval cat /sys/class/power_supply/BAT0/status)
+
+if [ "$file" == "Full" ]; then
+	echo "."
+elif [ "$file" == "Charging" ]; then
+	echo "+"
+else
+	echo "-"
+fi
+

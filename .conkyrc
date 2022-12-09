@@ -1,0 +1,47 @@
+update_interval 1
+cpu_avg_samples 2
+net_avg_samples 2
+out_to_console no
+override_utf8_locale yes
+double_buffer yes
+no_buffers yes
+text_buffer_size 32768
+imlib_cache_size 0
+own_window yes
+own_window_type override
+own_window_argb_visual yes
+own_window_argb_value 50
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+border_inner_margin 19
+border_outer_margin 0
+border_width 0
+draw_borders yes
+draw_outline no
+draw_shades no
+draw_graph_borders no
+xinerama_head 1
+gap_x 0
+gap_y 23
+use_xft yes
+font sans-serif:size=9
+short_units yes
+xftalpha 0.8
+uppercase no
+default_color eeeeee
+own_window_colour 000000
+own_window_transparent yes
+minimum_size 1857 0
+maximum_width 1857
+alignment top_middle
+pad_percents 2
+default_bar_size 39 7
+
+color0 eeeeee
+color1 777777
+color2 333333
+
+template0 ${exec echo "      "}${color1}•${color0}${exec echo "      "}
+
+TEXT
+$user_names@$nodename ${alignr}${offset -25} /${offset 17}${fs_used /} / ${fs_size /}${template0}RAM $mem / $memmax ($memperc%)${template0}SWAP ${swap} / ${swapmax} (${swapperc}%)${template0}CPU ${cpu cpu0}%${template0}wlan0 ${addrs wlan0}${template0}${exec bash ~/scripts/bat-status}/b ${battery_percent}%${offset 9}${battery_bar}${template0}${time %Y.%m.%d  %H:%M:%S} (${utime %H:%M} UTC)
+${color2}${hr 1}
